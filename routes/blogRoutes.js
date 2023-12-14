@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 // sql query to get all blog posts from the database and display them on the page ordered by creation time/date with category options
 router.get("/", (req, res) => {
@@ -81,6 +83,45 @@ router.post("/", upload.single("image"), (req, res) => {
       res.redirect("/blogs");
     }
   );
+});
+
+// SIGNUP ROUTING
+
+router.post("/signup", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    // Add user to the database
+    const { username, email } = req.body;
+    const addUserQuery = `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`;
+    await db.run(addUserQuery, [username, email, hashedPassword]);
+
+    res.redirect("/blogs");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/signup");
+  }
+});
+
+// LOGIN ROUTING
+
+router.post("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+});
+
+//displaying login
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+//displaying signup
+router.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
 module.exports = router;
