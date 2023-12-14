@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <meta charset="UTF-8" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Stylesheets, separate for the sakura effect -->
+    <link rel="stylesheet" type="text/css" href="/css/test_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/sakura.css" />
+    <title>Blog Home</title>
+  </head>
+  <body>
+    <main>
+      <!-- Background animation from https://codepen.io/yochans/pen/MWEoJOZ -->
+      <div class="sakura">
+        <span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span>
+      </div>
+      <!-- Header including link to create new posts -->
+      <header>
+        <nav id="nav-split">
+          <div id="nav-left">
+            <a href="/blogs"><img src="/images/cherry.png" /></a>
+            <h1>
+              ECHOES of
+              <div class="wrapper">
+                <svg>
+                  <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    SAKURA
+                  </text>
+                </svg>
+              </div>
+            </h1>
+          </div>
+          <div id="nav-right">
+            <a id="new-post" href="/blogs/new">Create New Post</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Overall posts container, bundling them -->
+      <div class="posts-container">
+        <h1>All Posts</h1>
+        <div>
+          <h3>Filter by Category:</h3>
+          <form action="/blogs" method="GET">
+            <select name="category">
+              <option class="dropdown" value="">All Categories</option>
+              <% categories.forEach(category => { %>
+              <option class="dropdown" value="<%= category.category %>">
+                <%= category.category %>
+              </option>
+              <% }) %>
+            </select>
+            <button type="submit">Filter</button>
+          </form>
+        </div>
+        <!-- div to define posts grid -->
+        <div id="post-grid">
+          <!-- forEach to show every single new post -->
+          <% posts.forEach(post => { %>
+          <!-- Individual post styling with individual post.title and post.content -->
+          <div class="indiv-post">
+            <% if (post.image_url) { %>
+            <img
+              src="data:image/*;base64,<%= post.image_url %>"
+              alt="Post Image"
+            />
+            <% } %>
+            <h2>Title: <%= post.title %></h2>
+            <p><%= post.content %></p>
+            <p>Category: <%= post.category %></p>
+            <!-- <hr /> -->
+            <p>Posted on: <%= post.created_at %></p>
+            <!-- action button to remove the post by created post.id with methodOverride for delete. -->
+            <form action="/blogs/<%= post.id %>?_method=DELETE" method="POST">
+              <button type="submit">Remove</button>
+            </form>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2023 <a href="/blogs">ECHOES of Sakura</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

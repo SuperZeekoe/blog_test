@@ -1,0 +1,269 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+  }
+  
+  /* mainbox styling */
+  main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  /* header styling + nav splitting */
+  header {
+    background-color: #111111bb;
+    width: 95vw;
+    max-height: 250px;
+    margin: 0px 0px 10px 0px;
+    color: #fff;
+    text-align: center;
+    border: 0 solid #e5e7eb;
+    border-radius: 0px 0px 30px 30px;
+  }
+  
+  /* splitting nav in two parts, left/right. using space-between to make a big space in the middle. */
+  header #nav-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin: 0px 100px 0px 100px;
+  }
+  header #nav-split #nav-left {
+    display: flex;
+    align-items: center;
+  }
+
+  header #nav-split #nav-right {
+    margin-left: auto;
+  }
+
+
+
+  /* Image encapsulating in circle + hover effect */
+  header a>img {
+    width: 200px;
+    height: 200px;
+    padding: 7px;
+    /* margin: 0px 10px 0px 10px; */
+    margin: 10px;
+    border-radius: 50%;
+    border: 1px solid #BE3455;
+    transition: transform 300ms ease;
+  }
+  header a>img:hover {
+    transform: rotate(360deg);
+  }
+  header h1 {
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    text-shadow: 1px 1px 0px #000;
+    display: flex;
+    align-items: center;
+  }
+
+
+  /* New post creation button styling + hover */
+  #new-post {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #BE3455;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: transform 300ms ease;
+  }
+  
+  #new-post:hover {
+    background-color: #ec2655dc;
+    transform: rotate(2deg) scale(1.03);
+  }
+  
+  /* Overall post container for main display */
+  .posts-container {
+    width: 100%;
+    max-width: 85vw;
+    margin: 70px;
+    margin-bottom: 150px;
+    padding: 20px;
+    background-color: #0000000a;
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* sets up grid with row of max 3 fractions for indiv.posts */
+  #post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  
+  .posts-container h1 {
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 0px #000;
+  }
+  
+  /* each individual posts' styling */
+  .indiv-post {
+    margin: 20px;
+    background-color: #3232320e;
+    border: 1px solid #3232321f;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 0px #000;
+    max-width: 30vw;
+    min-width: 25vw;
+  }
+
+
+  .indiv-post h2 {
+    color: #BE3455;
+  }
+  
+  .indiv-post p {
+    color: white;
+  }
+  
+  .indiv-post hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  /* image boundaries and positioning */
+  .indiv-post img {
+    width: auto;
+    max-height: 25vh;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* input field styling for main site */
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    min-width: 300px;
+  }
+
+  /* select box styling to be more modern */
+  select {
+    min-width: 300px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+  
+  /* General button styling for website */
+  button {
+    background-color: #BE3455;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 500ms ease;
+  }
+
+  button:hover {
+    background-color: #be345494;
+    transition: 500ms ease;
+  }
+  
+  /* form for creating new posts styling to be in line with rest of website */
+  .new-post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    color: #f5f5f5;
+    background-color: rgba(0, 0, 0, 0.226)
+  }
+
+
+  .cancel-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f44242;
+    text-decoration: none;
+    transition: 300ms ease;
+  }
+  
+  .cancel-link:hover {
+    text-decoration: underline;
+    transition: 300ms ease;
+  }
+  
+
+  /* label styling */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #f5f5f5;
+    font-size: 1.5rem;
+  }
+
+  .input-field,
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+
+  /* special image selector styling for new posts */
+  #image {
+    padding: 25px;
+  }
+
+
+  /* footer styling to be in line with header */
+  footer {
+    background-color: #111111bb;
+    width: 95vw;
+    max-height: 250px;
+    color: #fff;
+    text-align: center;
+    border: 0 solid #e5e7eb;
+    border-radius: 30px 30px 0 0;
+    position: absolute;
+    bottom: 0;
+  }
+  footer a {
+    color: #fff;
+    text-decoration: none;
+  }

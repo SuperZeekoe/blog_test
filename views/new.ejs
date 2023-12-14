@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create New Post</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- stylesheets, separate for sakura effect -->
+    <link rel="stylesheet" type="text/css" href="/css/test_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/sakura.css" />
+  </head>
+  <body>
+    <main class="container">
+      <!-- Background animation from https://codepen.io/yochans/pen/MWEoJOZ-->
+      <div class="sakura">
+        <span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span><span></span>
+      </div>
+
+      <!-- Header containing nav -->
+      <header>
+        <nav id="nav-split">
+          <div id="nav-left">
+            <a href="/blogs"><img src="/images/cherry.png" /></a>
+            <h1>
+              ECHOES of
+              <div class="wrapper">
+                <svg>
+                  <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    SAKURA
+                  </text>
+                </svg>
+              </div>
+            </h1>
+          </div>
+          <div id="nav-right">
+            <a id="new-post" href="/blogs/new">Create New Post</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Main body for creating posts -->
+      <div class="posts-container">
+        <h1>Create a New Post</h1>
+        <!-- action refers to submitting to refer to /blogs page -->
+        <!-- enctype is for uploading images -->
+        <!---->
+        <form
+          action="/blogs"
+          method="POST"
+          enctype="multipart/form-data"
+          class="new-post-form"
+        >
+          <label for="title">Title:</label><br />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="input-field"
+            placeholder="Title"
+          /><br />
+          <label for="content">Content:</label><br />
+          <textarea
+            id="content"
+            name="content"
+            class="input-field"
+            placeholder="Content"
+          ></textarea>
+          <label for="category">Category:</label><br />
+          <select id="category" name="category">
+            <option value="News">News</option>
+            <option value="Gaming">Gaming</option>
+            <option value="Sports">Sports</option>
+          </select>
+          <br />
+          <label for="image">Image:</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+          <button type="submit" class="submit-button">Submit</button>
+        </form>
+        <a href="/blogs" class="cancel-link">Cancel</a>
+      </div>
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2023 <a href="/blogs">ECHOES of Sakura</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
