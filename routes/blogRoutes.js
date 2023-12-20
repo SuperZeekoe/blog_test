@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const multer = require("multer");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // sql query to get all blog posts from the database and display them on the page ordered by creation time/date with category options
@@ -85,34 +85,53 @@ router.post("/", upload.single("image"), (req, res) => {
   );
 });
 
-// SIGNUP ROUTING
-
+// Signup route
 router.post("/signup", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     // Add user to the database
     const { username, email } = req.body;
-    const addUserQuery = `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`;
+    const addUserQuery = `INSERT INTO users (username, email, password) VALUES (?,
+  ?, ?)`;
     await db.run(addUserQuery, [username, email, hashedPassword]);
-
-    res.redirect("/blogs");
+    res.redirect("/blogs/login");
   } catch (error) {
-    console.log(error);
-    res.redirect("/signup");
+    console.error(error);
+
+    res.redirect("/blogs/signup");
   }
 });
 
 // LOGIN ROUTING
 
-router.post("/logout", (req, res) => {
+router.post(
+  "/blogs/login",
+  passport.authenticate("local", {
+    successRedirect: "/blogs",
+    failureRedirect: "/login",
+    failureFlash: true, // Ensure you have flash messages configured
+  })
+);
+// Logout route
+router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       return next(err);
     }
-    res.redirect("/login");
+    res.redirect("/blogs/login");
   });
 });
+
+// router.post("/logout", (req, res) => {
+//   req.logout((err) => {
+//     if (err) {
+//       console.log(err);
+//       return next(err);
+//     }
+//     res.redirect("blogs/login");
+//   });
+// });
 
 //displaying login
 router.get("/login", (req, res) => {

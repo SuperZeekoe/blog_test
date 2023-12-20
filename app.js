@@ -4,8 +4,8 @@ const methodOverride = require("method-override"); // allows us to use PUT and D
 const path = require("path"); // ensures that the path is correct
 const app = express(); // initializes the app
 const session = require("express-session"); // allows the use of sessions
-const passport = require("passport"); // allows the use of passport
-const flash = require("connect-flash"); // allows the use of flash messages
+const passport = require("passport");
+const flash = require("connect-flash");
 
 const blogRoutes = require("./routes/blogRoutes"); // ensure this path is correct?
 const db = require("./database"); // ensures that the database is connected
@@ -17,11 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method")); // allows the use of PUT and DELETE methods
 
 // express session setup
-app.use(session({
-  secret: "secret",
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // passport setup
 app.use(passport.initialize());
@@ -37,7 +39,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error"); // sets the error message
   next();
 });
-
 
 // routes
 app.get("/", (req, res) => res.redirect("/blogs")); // redirects the root to the blogs page
